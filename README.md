@@ -82,7 +82,7 @@ ADAA KPI Compliance Tracker: Performance Analysis for Eastern Province Hospitals
 **Key Observations**  
 1. Inconsistent `Region` values and redundant field  
 2. 16.2% missing ICD-10 codes; 16.5% invalid CPT codes  
-3. Moderate duplication risk (1 per 500 records)  
+3. Weak duplication risk (1 per 5000 records)  
 4. Code normalization reduced invalid records by 85%  
  
 
