@@ -136,7 +136,8 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
       [Beds_Available],
       0
   )
-  
+  ``` 
+```dax
   No_show_Percent = 
   IF(
       NOT ISBLANK([No_show_Appointments]) &&
@@ -148,11 +149,11 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
       ),
       BLANK()
   )
-  '''
+```
+
 - Visualization: Line/bar charts, KPI cards, decomposition trees
 - Security: Row-Level Security (RLS) implementation
-
-  ### 8. Methodology
+- 
 **Visualization:**  
 • Line/bar charts for trend analysis and comparisons  
 • KPI cards for real-time metric monitoring  
