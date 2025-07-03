@@ -261,25 +261,35 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 ### 13. Recommendations
 **(For: Hospital Operations Leadership, Quality & Compliance, IT/Data Governance Teams)**
 
-1.  **Implement Proactive Bed Management:** Utilize historical admission/discharge patterns to forecast required bed openings *before* occupancy spikes (Category 1, Obs 2), moving away from reactive practices. *Action: Develop predictive model; Pilot in Surgery/Cardiology.*
+1.  **Implement Proactive Bed Management:**
+ Utilize historical admission/discharge patterns to forecast required bed openings *before* occupancy spikes (Category 1, Obs 2), moving away from reactive practices. *Action: Develop predictive model; Pilot in Surgery/Cardiology.
 
-2.  **Expand & Target Patient Reminder Systems:** Deploy enhanced SMS/WhatsApp reminders, prioritizing high no-show hospitals (Qatif PHC, Dammam Central) and departments (Cardiology, Outpatient), learning from KFHU's lower rates (Category 2, Obs 1,2,4). *Action: IT to implement system; Ops to design department-specific protocols.*
+2.  **Expand & Target Patient Reminder Systems:** 
+Deploy enhanced SMS/WhatsApp reminders, prioritizing high no-show hospitals (Qatif PHC, Dammam Central) and departments (Cardiology, Outpatient), learning from KFHU's lower rates (Category 2, Obs 1,2,4). *Action: IT to implement system; Ops to design department-specific protocols.
 
-3.  **Optimize June ER Resource Allocation:** Analyze and adjust staffing, triage protocols, and diagnostic department coordination specifically for June, based on recurring severe wait time breaches (Category 3, Obs 2). *Action: Form June Surge Task Force; Pre-plan resource shifts.*
+3.  **Optimize June ER Resource Allocation:** 
+Analyze and adjust staffing, triage protocols, and diagnostic department coordination specifically for June, based on recurring severe wait time breaches (Category 3, Obs 2). *Action: Form June Surge Task Force; Pre-plan resource shifts.
 
-4.  **Enforce Clinical Coding Standards:** Mandate dropdown lists and FHIR validation for ICD-10/CPT codes at point of entry to eliminate missing/invalid data (Category 4, Obs 1). *Action: IT system modification; Clinician training.*
+4.  **Enforce Clinical Coding Standards:** 
+Mandate dropdown lists and FHIR validation for ICD-10/CPT codes at point of entry to eliminate missing/invalid data (Category 4, Obs 1). *Action: IT system modification; Clinician training.
 
-5.  **Streamline Discharge Processes:** Implement rapid discharge pathways, especially in Outpatient, Radiology, and ER, and develop predictive triggers for early discharge activation during high admission periods (Category 5, Obs 1,2,3,4). *Action: Process redesign teams; Develop & deploy early discharge algorithm.*
+5.  **Streamline Discharge Processes:** 
+Implement rapid discharge pathways, especially in Outpatient, Radiology, and ER, and develop predictive triggers for early discharge activation during high admission periods (Category 5, Obs 1,2,3,4). *Action: Process redesign teams; Develop & deploy early discharge algorithm.
 
-6.  **Deploy Real-Time Departmental KPI Dashboards:** Provide department heads with Power BI dashboards featuring ALOS, BOR%, No-Show Rate, and ER Wait Times, including automated threshold breach alerts (All Categories). *Action: Finalize & deploy dashboards with RLS; Train managers.*
+6.  **Deploy Real-Time Departmental KPI Dashboards:** 
+Provide department heads with Power BI dashboards featuring ALOS, BOR%, No-Show Rate, and ER Wait Times, including automated threshold breach alerts (All Categories). *Action: Finalize & deploy dashboards with RLS; Train managers.
 
-7.  **Adopt DAMA-DMBOK Governance Framework:** Formalize metadata management (SharePoint), create a business glossary, implement data quality scoring, and enforce UUIDs for `Patient_ID` (Category 4, Obs 1,3,4; Formal Governance). *Action: Establish Data Governance Council; Implement framework components.*
+7.  **Adopt DAMA-DMBOK Governance Framework:** 
+Formalize metadata management (SharePoint), create a business glossary, implement data quality scoring, and enforce UUIDs for `Patient_ID` (Category 4, Obs 1,3,4; Formal Governance). *Action: Establish Data Governance Council; Implement framework components.
 
-8.  **Conduct Root-Cause Analysis in Short-Stay Departments:** Investigate specific bottlenecks causing high ALOS breaches in Outpatient, Radiology, and ER (e.g., report waits, staffing gaps, bed assignment delays) (Category 5, Obs 3,4). *Action: Departmental process mapping workshops; Staffing pattern review.*
+8.  **Conduct Root-Cause Analysis in Short-Stay Departments:**
+ Investigate specific bottlenecks causing high ALOS breaches in Outpatient, Radiology, and ER (e.g., report waits, staffing gaps, bed assignment delays) (Category 5, Obs 3,4). *Action: Departmental process mapping workshops; Staffing pattern review.
 
-9.  **Establish ER-Diagnostic Department SLAs:** Define and monitor Service Level Agreements between ER and Radiology/Cardiology capping turnaround times for diagnostics on ER patients to reduce overall ER wait times (Category 3, Obs 4). *Action: Define SLAs; Implement joint monitoring.*
+9.  **Establish ER-Diagnostic Department SLAs:** 
+Define and monitor Service Level Agreements between ER and Radiology/Cardiology capping turnaround times for diagnostics on ER patients to reduce overall ER wait times (Category 3, Obs 4). *Action: Define SLAs; Implement joint monitoring.
 
-10. **Replicate Radiology Bed Management:** Document and share Radiology's successful BOR% management strategies with Cardiology, Surgery, Outpatient, and Emergency departments (Category 1, Obs 1). *Action: Best practice documentation; Cross-departmental workshops.*
+10. **Replicate Radiology Bed Management:** 
+Document and share Radiology's successful BOR% management strategies with Cardiology, Surgery, Outpatient, and Emergency departments (Category 1, Obs 1). *Action: Best practice documentation; Cross-departmental workshops.
 
 ---
 
@@ -295,10 +305,10 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 
 ### 15. Technical Details
 **Primary Tools:**  
-• Power BI (Visualization/DAX/RLS)  
-• PostgreSQL (Data cleaning/analysis)  
-• Excel (Synthetic data generation)  
-• SharePoint (Documentation hosting)  
+• Power BI (Visualization/DAX)  
+• Power Query / Python (Data cleaning/analysis)  
+• Figma  (Designing BackGround)  
+
 
 **Python Queries:**  
 • [Uploading ADAA-KPI-Compliance-Tracker-Eastern-Province-Hospitals-Performance-Analysis-ADAA KPI Compliance & Data Governance Audit.ipynb.url[InternetShortcut]
