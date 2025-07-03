@@ -153,7 +153,7 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 
 - Visualization: Line/bar charts, KPI cards, decomposition trees
 - Security: Row-Level Security (RLS) implementation
-- 
+
 **Visualization:**  
 • Line/bar charts for trend analysis and comparisons  
 • KPI cards for real-time metric monitoring  
