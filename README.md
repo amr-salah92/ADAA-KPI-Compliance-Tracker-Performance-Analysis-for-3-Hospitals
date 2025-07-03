@@ -213,32 +213,47 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 
 **12.1 Category 1: Bed Utilization (BOR)**
 **Insight 1: Radiology Department Benchmark:** Radiology was the *only* department maintaining BOR% within ADAA standards consistently throughout FY2024-2025, demonstrating effective capacity management. This contrasts sharply with persistent breaches in Outpatient (Avg ~75%), Emergency (Avg ~73%), Cardiology (Avg ~41%), and Surgery (Avg ~38%).
+
 **Insight 2: Reactive Bed Strategy:** The strong positive correlation (r = 0.71, p<0.01) between `Beds_Available` and `Beds_Occupied` indicates beds are primarily opened *in response* to rising occupancy, rather than proactively forecasted. This contributes to periods of both over-occupancy (ER, Outpatient) and underutilization (Cardiology, Surgery).
+
 **Insight 3: No Link Between Beds & Stay Duration:** Analysis found no meaningful correlation (r ≈ 0.007) between `Bed Occupancy Rate (BOR%)` and `Length_of_Stay (LOS)`. High bed occupancy does not predict longer patient stays, nor does low occupancy predict shorter stays, suggesting bed availability is not a primary driver of LOS.
+
 **Insight 4: Seasonal & Departmental Lows:** Significant monthly BOR% lows were identified: System-wide low in Jan-2025; Radiology (Mar-2025); Emergency (Apr-2025); Outpatient (Aug-2024); Surgery (Jun-2025). Hospital lows: Dammam Central (Jan-2025); Qatif PHC & AlKhobar Gen (Jun-2024); KFHU (Jun-2025). These patterns highlight specific times/departments needing targeted capacity review.
 
 **12.2 Category 2: Appointment Attendance (No-Show Rate)**
 **Insight 1: Cardiology & Outpatient Disengagement:** Cardiology and Outpatient departments consistently reported the highest *average* no-show rates (~23% across all hospitals) in FY2024-2025, significantly higher than Surgery (22.4%). This indicates specific challenges in patient engagement for non-urgent, chronic, or follow-up care.
+
 **Insight 2: Hospital-Level Variation:** Qatif PHC had the highest overall average no-show rate (23.4%), followed by AlKhobar Gen (23.2%), Dammam Central (22.5%), and KFHU (22.1%). This 1.3% difference highlights varying effectiveness in appointment management and patient reminder systems across the region.
+
 **Insight 3: High Absolute Volumes Despite Lower Rates:** Surgery departments, while having the lowest *average rate* (22.4%), generated the highest *absolute* number of no-shows at KFHU (6,850). Similarly, Emergency Departments at KFHU (6,781 no-shows) and Cardiology at Qatif PHC (6,739 no-shows) represent substantial operational burdens requiring process review.
+
 **Insight 4: Temporal Improvement Opportunities:** Distinct monthly periods showed significant drops in no-show rates: Qatif PHC (Feb-2025: Lowest Rate), KFHU (Dec-2024: Lowest Rate), Dammam Central (May-2025: Improvement), AlKhobar Gen (Jun-2025: Improvement). These periods warrant investigation to identify replicable operational changes or campaign impacts.
 
 **12.3 Category 3: ER Wait Times**
 **Insight 1: Dammam Central & Emergency Dept Leadership:** Dammam Central Hospital consistently achieved the ADAA ER wait time target (Avg 29.65 mins < 30 mins). Within departments, the core Emergency Department itself had the best overall average wait time (29.93 mins), demonstrating efficient intake/triage.
+
 **Insight 2: Recurring June Performance Deterioration:** The most significant ER wait time breaches occurred in June 2024 (33.00 mins avg) and June 2025 (31.36 mins avg). This recurring pattern strongly suggests seasonal capacity strain, potentially linked to summer vacations, holidays, or regional events impacting staffing or patient volume.
+
 **Insight 3: Critical Mid-Tier Wait Time Prevalence:** 47.85% of all ER visits (4,095 out of 8,557 analyzed visits) experienced wait times between 31-60 minutes. This represents a substantial cohort just exceeding the compliance threshold, where targeted efficiency gains could yield significant compliance improvements. Distribution across hospitals was remarkably even (KFHU 25.35%, Qatif PHC 25.25%, Dammam Central 24.71%, AlKhobar Gen 24.69%).
+
 **Insight 4: Diagnostic Department Bottlenecks:** While Radiology and Cardiology are not core ER departments, they contributed significantly to the most severe delays (61-120 mins: Radiology 24.72%, Cardiology 21.35%). This points to potential bottlenecks in diagnostic processes (e.g., imaging, lab) delaying ER patient clearance and overall throughput.
 
 **12.4 Category 4: Data Quality & Governance**
 **Insight 1: Clinical Coding Gaps Impede Operations:** High rates of missing ICD-10 codes (16.2%, 810 records) and invalid/blank CPT codes (16.5%, 827 records) directly hinder accurate clinical reporting, operational analysis, and create financial risk (insurance claim rejections). Distribution showed Emergency, Surgery, and Radiology departments had the highest counts of invalid records (26 each).
+
 **Insight 2: Mapping & Imputation Effective:** The applied two-way clinical code mapping (ICD-10 ↔ CPT) and ICD-10 normalization (e.g., adding decimals) successfully reduced the volume of invalid records by over 85% (from ~800+ to 117 per code type), demonstrating a viable interim solution while source system fixes are implemented.
+
 **Insight 3: Duplication Risk Moderate:** Identification of an average of 1 duplicate record per 500 entries indicates a moderate but tangible risk of double-counting patient encounters, potentially inflating volume metrics and distorting per-patient calculations like ALOS.
+
 **Insight 4: Redundant & Inconsistent Fields:** The `Region` field was entirely redundant (all records pertain to Eastern Province) but contained inconsistent values and nulls, complicating filtering. The existence of the `` field with values inconsistent with `Hospital_Name` necessitated its exclusion to ensure accurate facility-level reporting.
 
 **12.5 Category 5: Average Length of Stay (ALOS)**
 **Insight 1: Discharge Delays Drive LOS:** The strong positive correlation (r = 0.78, p<0.01) between `Length_of_Stay (LOS)` and `Discharges` indicates that delays in discharging patients are a primary constraint on patient flow, directly extending stays for others.
+
 **Insight 2: Admission Surges Exacerbate LOS:** A strong positive correlation (r = 0.73, p<0.01) between `Admissions` and `LOS` shows that periods of high admission volume lead to longer average stays, suggesting capacity management struggles during surges.
+
 **Insight 3: Short-Stay Departments Top Breach Contributors:** Despite having the lowest ALOS threshold (1 day), Outpatient (22.51% of breaches), Radiology (22.31%), and Emergency (22.21%) departments were the top three sources of ADAA ALOS breaches. This is particularly concerning given the expectation of very short stays, pointing to severe bottlenecks or misclassification.
+
 **Insight 4: Systemic High Breach Rates in Core Areas:** Specific department-hospital combinations exhibited alarmingly high ALOS breach rates, predominantly in Outpatient, ER, and Radiology: AlKhobar Gen (ER 93.8%, Outpatient 92.5%, Rad 89.6%), Dammam Central (Rad 91.9%, Outpatient 91.0%, ER 90.9%), KFHU (Outpatient 93.6%, Rad 92.7%, ER 92.3%), Qatif PHC (ER 93.9%, Outpatient 93.7%, Rad 91.5%). This indicates widespread patient flow issues in fundamental service areas.
 
 ---
@@ -247,14 +262,23 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 **(For: Hospital Operations Leadership, Quality & Compliance, IT/Data Governance Teams)**
 
 1.  **Implement Proactive Bed Management:** Utilize historical admission/discharge patterns to forecast required bed openings *before* occupancy spikes (Category 1, Obs 2), moving away from reactive practices. *Action: Develop predictive model; Pilot in Surgery/Cardiology.*
+
 2.  **Expand & Target Patient Reminder Systems:** Deploy enhanced SMS/WhatsApp reminders, prioritizing high no-show hospitals (Qatif PHC, Dammam Central) and departments (Cardiology, Outpatient), learning from KFHU's lower rates (Category 2, Obs 1,2,4). *Action: IT to implement system; Ops to design department-specific protocols.*
+
 3.  **Optimize June ER Resource Allocation:** Analyze and adjust staffing, triage protocols, and diagnostic department coordination specifically for June, based on recurring severe wait time breaches (Category 3, Obs 2). *Action: Form June Surge Task Force; Pre-plan resource shifts.*
+
 4.  **Enforce Clinical Coding Standards:** Mandate dropdown lists and FHIR validation for ICD-10/CPT codes at point of entry to eliminate missing/invalid data (Category 4, Obs 1). *Action: IT system modification; Clinician training.*
+
 5.  **Streamline Discharge Processes:** Implement rapid discharge pathways, especially in Outpatient, Radiology, and ER, and develop predictive triggers for early discharge activation during high admission periods (Category 5, Obs 1,2,3,4). *Action: Process redesign teams; Develop & deploy early discharge algorithm.*
+
 6.  **Deploy Real-Time Departmental KPI Dashboards:** Provide department heads with Power BI dashboards featuring ALOS, BOR%, No-Show Rate, and ER Wait Times, including automated threshold breach alerts (All Categories). *Action: Finalize & deploy dashboards with RLS; Train managers.*
+
 7.  **Adopt DAMA-DMBOK Governance Framework:** Formalize metadata management (SharePoint), create a business glossary, implement data quality scoring, and enforce UUIDs for `Patient_ID` (Category 4, Obs 1,3,4; Formal Governance). *Action: Establish Data Governance Council; Implement framework components.*
+
 8.  **Conduct Root-Cause Analysis in Short-Stay Departments:** Investigate specific bottlenecks causing high ALOS breaches in Outpatient, Radiology, and ER (e.g., report waits, staffing gaps, bed assignment delays) (Category 5, Obs 3,4). *Action: Departmental process mapping workshops; Staffing pattern review.*
+
 9.  **Establish ER-Diagnostic Department SLAs:** Define and monitor Service Level Agreements between ER and Radiology/Cardiology capping turnaround times for diagnostics on ER patients to reduce overall ER wait times (Category 3, Obs 4). *Action: Define SLAs; Implement joint monitoring.*
+
 10. **Replicate Radiology Bed Management:** Document and share Radiology's successful BOR% management strategies with Cardiology, Surgery, Outpatient, and Emergency departments (Category 1, Obs 1). *Action: Best practice documentation; Cross-departmental workshops.*
 
 ---
