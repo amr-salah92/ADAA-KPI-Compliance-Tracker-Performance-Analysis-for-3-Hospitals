@@ -301,7 +301,9 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
 • SharePoint (Documentation hosting)  
 
 **Python Queries:**  
-•
+• [Uploading ADAA-KPI-Compliance-Tracker-Eastern-Province-Hospitals-Performance-Analysis-ADAA KPI Compliance & Data Governance Audit.ipynb.url[InternetShortcut]
+URL=https://github.com/amr-salah92/ADAA-KPI-Compliance-Tracker-Eastern-Province-Hospitals-Performance-Analysis/blob/main/ADAA%20KPI%20Compliance%20%26%20Data%20Governance%20Audit.ipynb
+…]()
 
 **Power bi :** [Interactive Dashboard]()  
 
