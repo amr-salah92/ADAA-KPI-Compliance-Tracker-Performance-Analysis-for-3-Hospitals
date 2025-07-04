@@ -151,15 +151,6 @@ Inconsistent nomenclature, incomplete fields, schema gaps, duplication risk
   )
 ```
 
-- Visualization: Line/bar charts, KPI cards, decomposition trees
-- Security: Row-Level Security (RLS) implementation
-
-**Visualization:**  
-• Line/bar charts for trend analysis and comparisons  
-• KPI cards for real-time metric monitoring  
-
- ![Screenshot_4-7-2025_1338_chat deepseek com](https://github.com/user-attachments/assets/e06ab42c-34d9-473b-965c-f5a9248e1431)
-
 
 **Security:**  
 • Row-Level Security (RLS) implementation in Power BI to restrict data access by:
@@ -305,9 +296,8 @@ Document and share Radiology's successful BOR% management strategies with Cardio
 
 ### 15. Technical Details
 **Primary Tools:**  
-• Power BI (Visualization/DAX)  
-• Power Query / Python (Data cleaning/analysis)  
-• Figma  (Designing BackGround)  
+ Python (Data cleaning/analysis)  
+
 
 
 **Python Queries:**  
@@ -315,8 +305,6 @@ Document and share Radiology's successful BOR% management strategies with Cardio
 URL=https://github.com/amr-salah92/ADAA-KPI-Compliance-Tracker-Eastern-Province-Hospitals-Performance-Analysis/blob/main/ADAA%20KPI%20Compliance%20%26%20Data%20Governance%20Audit.ipynb
 …]()
 
-**Power bi :** [Interactive Dashboard]([InternetShortcut]
-URL=https://github.com/amr-salah92/ADAA-KPI-Compliance-Tracker-Eastern-Province-Hospitals-Performance-Analysis/blob/main/adaa.pbix)  
 
 ---
 
