@@ -262,14 +262,15 @@ All hospitals exceeded 2hr ADAA target:
 ---
 
 ## 13. Recommendations
-| Goal                        | Action                                                                 |
-|-----------------------------|------------------------------------------------------------------------|
-| Reduce ALOS                 | Root cause analysis in ICU/Oncology (Jeddah/Abha)                      |
-| Optimize Wait Times         | Implement fast-track triage + pre-registration systems                 |
-| Address Chronic Diseases    | Launch disease management clinics (Chronic diseases like atrial fibrillation, type 2 diabetes, hyperlipidemia, and heart disease contribute significantly to longer hospital stays (ALOS) and higher readmission rates.)                                    |
-| Elevate CSAT                | Implement service recovery protocols + empathy training               |
-| Monitor Diagnoses/Procedures| Use predictive analytics for staffing/resource allocation              |
-| Sustain Bed Utilization     | Dynamic scheduling + cross-departmental bed management                |
+
+| Goal                            | Action                                                                                                                               |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Reduce ALOS                     | Perform root cause analysis of care delays in ICU and Oncology (Specialty Jeddah, Specialty Abha). Optimize discharge planning, care coordination, and clinical workflows. |
+| Optimize Wait Times             | Deploy fast-track triage lanes, automated pre-registration kiosks, and predictive queue management for peak hours.                   |
+| Address Chronic Disease Burden  | Launch dedicated chronic disease management clinics focused on atrial fibrillation, Type 2 diabetes, hyperlipidemia, and heart disease. These clinics will reduce preventable admissions, shorten ALOS, and lower readmission rates. |
+| Elevate CSAT                    | Implement service recovery protocols for negative experiences, deploy empathy and communication training, and introduce real-time CSAT feedback kiosks. |
+| Monitor Diagnosis & Procedure Trends | Use predictive analytics models to forecast high-incidence ICD10 and CPT cases, proactively adjusting staffing, equipment, and resource allocation. |
+| Sustain Bed Utilization         | Apply dynamic admission/discharge scheduling and cross-departmental bed management dashboards to stabilize BOR within 75%-85%.        |
 
 ---
 
