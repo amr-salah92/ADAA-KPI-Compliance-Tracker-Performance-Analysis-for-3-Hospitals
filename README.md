@@ -215,7 +215,7 @@ Here are the tables rewritten in the requested Markdown format:
 ---
 
 ## 11. Executive Summary
-**For Chief Operations Officer** (Q2 2025):
+**For Chief Operations Officer** (Q4 2025):
 - ✅ **Bed Occupancy**: All hospitals sustained 75–85% ADAA range (±3% variability)
 - ⚠️ **Emergency Wait Times**:
   - Specialty Jeddah: 3.07hr
