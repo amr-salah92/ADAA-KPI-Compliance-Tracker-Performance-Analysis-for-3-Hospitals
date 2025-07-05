@@ -266,7 +266,7 @@ All hospitals exceeded 2hr ADAA target:
 |-----------------------------|------------------------------------------------------------------------|
 | Reduce ALOS                 | Root cause analysis in ICU/Oncology (Jeddah/Abha)                      |
 | Optimize Wait Times         | Implement fast-track triage + pre-registration systems                 |
-| Address Chronic Diseases    | Launch disease management clinics                                     |
+| Address Chronic Diseases    | Launch disease management clinics (Chronic diseases like atrial fibrillation, type 2 diabetes, hyperlipidemia, and heart disease contribute significantly to longer hospital stays (ALOS) and higher readmission rates.)                                    |
 | Elevate CSAT                | Implement service recovery protocols + empathy training               |
 | Monitor Diagnoses/Procedures| Use predictive analytics for staffing/resource allocation              |
 | Sustain Bed Utilization     | Dynamic scheduling + cross-departmental bed management                |
