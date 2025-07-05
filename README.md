@@ -99,7 +99,6 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 **Descriptive Analytics**: Time-series analysis of occupancy/wait times using Power BI  
 
 ---
-# Data Analysis Report
 
 ## 9. Data Structure & Initial Checks
 **Overview**: Four primary tables totaling 60,532 records
