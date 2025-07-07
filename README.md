@@ -29,7 +29,7 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 - **Detect Underperformance**: Identify real-time trends breaching ADAA thresholds for metrics like ALOS, BOR%, ICD10 descriptions, CPT descriptions, and ER wait time.  
 - **Enable Data-Driven Decisions**: Provide department heads with visual insights to understand performance drivers.  
 - **Ensure Regulatory Compliance**: Generate auditable documentation demonstrating adherence to MOH and ADAA requirements.  
-- **Establish Data Foundation**: Implement foundational data governance practices and access controls (RLS) within Power BI.  
+
 
 ---
 
@@ -144,32 +144,30 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 
 **Represents**: Date dimension for time-based joins
 
-### Additional Dimension Tables
-| Table                     | Columns                     | Key Points                         | Usage Considerations                     |
-|---------------------------|-----------------------------|------------------------------------|------------------------------------------|
-| `dim_icd10_codes`         | ICD10Code (PK), Description | 20 common diagnosis codes          | Join to fact_admissions via diagnosis codes |
-| `dim_cpt_codes`           | CPTCode (PK), Description   | 20 common procedure codes          | Join to fact_admissions via procedure codes |
-| `dim_csat_stakeholders`   | StakeholderType (PK)        | 6 stakeholder types                | Decodes CSAT_Stakeholder                 |
-| `dim_csat_categories`     | FeedbackCategory (PK)       | 6 feedback categories              | Decodes CSAT_FeedbackCategory            |
 
 ### Table 4: `fact_admissions`
-| Column              | Description                       | Key Points                     | Usage Considerations          |
-|---------------------|-----------------------------------|--------------------------------|-------------------------------|
-| AdmissionID (PK)    | Unique admission ID               | 50,000+ records                | Ensure joins on dimensional keys |
-| PatientID           | Patient identifier                | 10% readmission rate           |                               |
-| HospitalID          | Hospital foreign key              | CSAT survey 1-14 days post-d/c |                               |
-| DepartmentID        | Department foreign key            |                                |                               |
-| AdmissionDateKey    | Admission date key                |                                |                               |
-| DischargeDateKey    | Discharge date key                |                                |                               |
-| WaitTimeHours       | Wait time in hours                |                                |                               |
-| LengthOfStay        | Length of stay                    |                                |                               |
-| ReadmissionFlag     | Readmission indicator             |                                |                               |
-| BedOccupancyRate    | Bed occupancy rate                |                                |                               |
-| AdmissionSource     | Admission source                  |                                |                               |
-| InsuranceType       | Insurance type                    |                                |                               |
-| Diagnoses           | Diagnosis codes                   |                                |                               |
-| Procedures          | Procedure codes                   |                                |                               |
-| CSAT fields         | Satisfaction metrics              |                                |                               |
+
+| Column                   | Description                       | Key Points                     | Usage Considerations          |
+|--------------------------|-----------------------------------|--------------------------------|-------------------------------|
+| **AdmissionID (PK)**     | Unique admission identifier       | 50,000+ records                | Ensure joins on dimensional keys; primary key for fact table |
+| **PatientID**            | Patient identifier                | 10% readmission rate           | Link to patient dimension table; anonymized format (e.g., 137C9570D5E6) |
+| **HospitalID**           | Hospital foreign key              | CSAT survey 1-14 days post-d/c | Join to hospital dimension; impacts satisfaction metrics |
+| **DepartmentID**         | Department foreign key            |                                | Join to department dimension; indicates care unit |
+| **AdmissionDateKey**     | Admission date surrogate key      | YYYYMMDD integer format        | Date dimension join for admission timing |
+| **DischargeDateKey**     | Discharge date surrogate key      | YYYYMMDD integer format        | Date dimension join; validate ≥ AdmissionDateKey |
+| **LengthOfStay**         | Duration in days                  | Integer (e.g., 1)              | Calculate from date keys; watch same-day discharges |
+| **WaitTimeHours**        | ER wait time pre-admission        | Decimal (e.g., 4.8)            | Track efficiency; may have outliers |
+| **BedOccupancyRate**     | Utilization percentage            | Decimal 0.00-1.00 (e.g., 0.83)| Snapshotted at admission; impacts resource analysis |
+| **PrimaryDiagnosisCode** | Primary ICD-10 code               | Standardized (e.g., E78.5)     | Join to diagnosis dimension; clinical grouping |
+| **PrimaryDiagnosisDesc** | Diagnosis description             | Human-readable (e.g., Hyperlipidemia) | Reporting use; denormalized from code |
+| **ProcedureCodes**       | Performed procedure codes         | CPT/HCPCS (e.g., 99232)        | Consider array storage; impacts billing analytics |
+| **AdmissionSource**      | Point of origin                   | Categorical (e.g., ER)         | Flow analysis; ER vs. referral differences |
+| **InsuranceType**        | Payer category                    | Categorical (e.g., Private)    | Reimbursement analysis; impacts financial facts |
+| **DischargeDisposition** | Post-care destination             | Categorical (e.g., Hospice)    | Readmission risk indicator; care continuity |
+| **CSAT_Score**           | Satisfaction score (1-5 scale)    | Decimal (e.g., 4.6)            | Collected 1-14d post-discharge; voluntary bias |
+| **CSAT_Stakeholder**     | Feedback provider role            | Categorical (e.g., Insurance Provider) | Stratify analysis by stakeholder type |
+| **CSAT_FeedbackCategory**| Feedback topic                    | Categorical (e.g., Billing Clarity) | Root cause analysis; trend monitoring |
+| **CSAT_Comment**         | Free-text feedback                | Unstructured (e.g., "Very satisfied with care") | NLP required; PII scrubbing needed |
 
 **Represents**: Detailed admissions and satisfaction data
 Here are the tables rewritten in the requested Markdown format:
@@ -203,7 +201,13 @@ Here are the tables rewritten in the requested Markdown format:
 ## 10. Documenting Issues
 | Table            | Column             | Issue Description                                                                 | Magnitude | Solvable | Resolution                                                                 |
 |------------------|--------------------|-----------------------------------------------------------------------------------|-----------|----------|----------------------------------------------------------------------------|
-| fact_admissions  | Various Columns    | ~3% NULLs in key metrics (WaitTimeHours, SecondaryDiagnosisCodes, CSAT_Score)    | High      | Yes      | Impute numeric nulls with department-month medians; categoricals → 'Unknown' |
+| fact_admissions  | Various Columns    | ~3% NULLs in key metrics (WaitTimeHours & CSAT_Score)    | High      | Yes      | Impute numeric nulls with department-month medians |
+| fact_admissions | Admission_Date      | Multiple date formats (ISO '2024-07-07', EU '07/07/2024', US '07-07-2024') causing parsing errors | High      | Yes      | Standardize to YYYY-MM-DD using datetime conversion                        |
+| fact_admissions | Discharge_Date      | Inconsistent formats mixed with Admission_Date; US format inappropriate for KSA   | High      | Yes      | Convert to ISO 8601; validate Discharge ≥ Admission                        |
+| fact_admissions | LengthOfStay          | Incorrect calculation               | High      | Yes      | corrected using : **LOS = Discharge_Date - Admission_Date**       |
+| fact_admissions |  SecondaryDiagnosisCodes     | Null values   | High      | Yes      | used AI to Know the description of each ICD10 Code                        |
+
+
 
 **Handling NULL Values**:
 - **Assessment**: Missingness confirmed as Missing At Random (MAR)
