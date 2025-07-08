@@ -154,7 +154,7 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 | Column                   | Description                       | Key Points                     | Usage Considerations          |
 |--------------------------|-----------------------------------|--------------------------------|-------------------------------|
 | **AdmissionID (PK)**     | Unique admission identifier       | 50,000+ records                | Ensure joins on dimensional keys; primary key for fact table |
-| **PatientID**            | Patient identifier                | 10% readmission rate           | Link to patient dimension table; anonymized format (e.g., 137C9570D5E6) |
+| **PatientID**            | Patient identifier                |                                | Link to patient dimension table; anonymized format (e.g., 137C9570D5E6) |
 | **HospitalID**           | Hospital foreign key              | CSAT survey 1-14 days post-d/c | Join to hospital dimension; impacts satisfaction metrics |
 | **DepartmentID**         | Department foreign key            |                                | Join to department dimension; indicates care unit |
 | **AdmissionDateKey**     | Admission date surrogate key      | YYYYMMDD integer format        | Date dimension join for admission timing |
