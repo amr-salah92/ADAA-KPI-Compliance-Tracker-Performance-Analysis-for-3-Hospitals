@@ -123,7 +123,7 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 ### Table 2: `dim_departments`
 | Column         | Description                   | Key Points                     | Usage Considerations          |
 |----------------|-------------------------------|--------------------------------|-------------------------------|
-| DepartmentID (PK) | Unique department ID       | 5–8 departments per hospital   | Filter by ServiceLine         |
+| DepartmentID (PK) | Unique department ID       | 2 departments per hospital   | Filter by ServiceLine         |
 | HospitalID (FK) | Foreign key to hospitals   | Staff ratio: 0.8 staff per bed |                               |
 | DepartmentName | Department name               |                                |                               |
 | ServiceLine    | Service category              |                                |                               |
