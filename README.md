@@ -72,13 +72,17 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 ---
 
 ### 4. Data Collection and Sources <a name="data-collection-and-sources"></a>
-| Source                     | Description                                  | Update Frequency |
-|----------------------------|----------------------------------------------|------------------|
-| Enterprise Data Warehouse  | EHR system (admissions, discharges, surveys) | Daily            |
-| dim_dates                  | Date dimension (2020-2025)                   | Static           |
-| dim_hospitals              | Hospital master data                         | Quarterly        |
-| fact_admissions            | Transactional admission records              | Daily (CSV)      |
 
+| Source System         | Table Name             | Update Frequency | Record Count | Key Data Elements                                                                 | Purpose                                                                 |
+|-----------------------|------------------------|------------------|--------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **Enterprise EHR**    | `fact_admissions`      | Daily (CSV)      | 50,000+      | AdmissionID, LengthOfStay, WaitTimeHours, BedOccupancyRate, CSAT_Score            | Core transactional data for patient flow and satisfaction metrics        |
+| **Master Data Mgmt**  | `dim_hospitals`        | Quarterly        | 3            | HospitalID, HospitalName, TotalCapacity, AccreditationStatus                      | Hospital attributes and capacity tracking                               |
+| **Master Data Mgmt**  | `dim_departments`      | Quarterly        | 2            | DepartmentID, HospitalID, DepartmentName, ServiceLine, DeptCapacity               | Departmental structure and resource allocation                           |
+| **Date Warehouse**    | `dim_dates`            | Static           | 2017         | DateKey, FullDate, Year, Quarter, MonthName, IsWeekend                            | Time-based analysis and cohort comparisons                               |
+| **Clinical Coding**   | `dim_icd10_codes`      | Monthly          | 20           | ICD10Code, Description                                                            | Standardized diagnosis code mapping (e.g., E78.5 = Hyperlipidemia)       |
+| **Clinical Coding**   | `dim_cpt_codes`        | Monthly          | 20           | CPTCode, Description                                                              | Procedure code mapping (e.g., 99232 = Subsequent hospital care)          |
+| **Patient Experience**| `dim_csat_stakeholders`| Annually         | 6            | StakeholderType                                                                   | Categorizes CSAT feedback providers (Patient, Family, Physician, etc.)  |
+| **Patient Experience**| `dim_csat_categories`  | Annually         | 6            | FeedbackCategory                                                                  | Classifies CSAT feedback topics (Timeliness, Communication, etc.)       |
 ---
 
 ### 5. Formal Data Governance <a name="formal-data-governance"></a>
@@ -234,34 +238,54 @@ Here are the tables rewritten in the requested Markdown format:
 
 ---
 
-## 12. Insights Deep Dive
-### 📊 Insights Deep Dive
+## 12. ### 12. Insights Deep Dive  
 
-#### 🏥 Capacity & Occupancy
-| Hospital          | Bed Occupancy | ALOS (Days) | Key Findings                                                                 |
-|-------------------|---------------|-------------|------------------------------------------------------------------------------|
-| **Specialty Jeddah** | 75.4%         | **8.02**    | ICU ALOS 7.95d; Oncology ALOS 8.11d; **Weakest LOS-WaitTime correlation** (-0.00016) |
-| **Al Madina**       | 73.8–75.8%    | **7.99**    | ICU ALOS **8.02d**; **Strongest WaitTime-CSAT link** (-0.0059)               |
-| **Specialty Abha**  | 75%           | **7.98**    | ICU ALOS **8.04d**; Oncology ALOS **7.83d**; **Highest bed-readmission link** (-0.0026) |
+#### **A. Capacity & Occupancy**  
+| Hospital          | ALOS (Days) | Target | BOR Range       | Key Findings |  
+|-------------------|-------------|--------|-----------------|--------------|  
+| Specialty Jeddah  | **8.02**    | 7      | 75.4%           | ICU/Oncology bottlenecks persist (Oncology ALOS: 8.11 days). Highest BOR: **75.7%** (Jan 2023) |  
+| Al Madina         | **7.99**    | 7      | **73.8–75.8%**  | ICU ALOS: **8.02 days**; Oncology ALOS: **8.05 days**. Highest BOR: **75.8%** (Apr 2025) |  
+| Specialty Abha    | **7.98**    | 7      | **72.9–75.9%**  | ICU ALOS: **8.04 days**; Oncology ALOS: **7.83 days**. Highest BOR: **75.9%** (Jul 2024) |  
+> **Critical Issue**: All hospitals exceed ALOS target (7 days), indicating systemic discharge inefficiencies.  
 
-> **⚠️ Critical Findings**:  
-> - **All hospitals exceed 7-day ALOS target** (Jeddah: 8.02d, Al Madina: 7.99d, Abha: 7.98d)  
-> - **No significant linear correlations** between LOS and other metrics (all |r| < 0.006)  
-> - **Strongest negative correlation**: CSAT vs Wait Times (r = -0.0059) → *Every 1hr wait increase = 0.59% CSAT drop*  
+#### **B. Patient Flow & Wait Times**  
+- **All hospitals exceeded 2hr ADAA target**:  
+  - **Specialty Jeddah**: 3.07hr (ICU highest: **3.29hr** Oct 2023; Oncology lowest: **2.77hr** Aug 2024)  
+  - **Al Madina**: 3.15hr (ICU: **3.17hr** Jul 2024; Oncology lowest: **2.68hr** Jul 2024)  
+  - **Specialty Abha**: 3.05hr (Oncology highest: **3.21hr** Feb 2024/2025)  
+- **CSAT-Wait Time Correlation**:  
+  - Longest waits (e.g., **3.25hr** at Abha, May/Jun 2025) correlate with lower CSAT (**4.53**)  
+  - Shortest waits (e.g., **2.64hr** at Jeddah ICU, Mar 2025) boost CSAT (**4.59**)  
 
-#### ⏱️ Patient Flow & Wait Times
-**Proven CSAT Impact**:  
-- **Al Madina Oncology**: 2.68hr wait → CSAT 4.45 (July 2024)  
-- **Jeddah ICU**: 3.25hr wait → CSAT 4.53 (July 2025)  
-- **Abha ICU**: 2.69hr wait → CSAT 4.54 (Oct 2025)  
+#### **C. Clinical Quality**  
+| Hospital          | Department | Top Diagnoses/Cases |  
+|-------------------|------------|---------------------|  
+| Specialty Jeddah  | Oncology   | Heart disease (**958 cases**), Chest X-ray single view (**525**) |  
+|                   | ICU        | Headache (**332 cases**), Comprehensive metabolic panel (**181**) |  
+| Al Madina         | Oncology   | Anxiety (**317 cases**), MRI lumbar spine w/o contrast (**185**) |  
+|                   | ICU        | Heart disease (**320**), Diabetes Type 2 (**323**) |  
+| Specialty Abha    | Oncology   | Hyperlipidemia (**337**), X-ray single view (**192**) |  
+|                   | ICU        | Hyperlipidemia (**322**), UTI (**322**), High-severity ED visits (**172**) |  
 
-| Metric              | Correlation | Impact                                  |
-|---------------------|-------------|-----------------------------------------|
-| Wait Time → CSAT    | -0.0059     | **+0.5hr wait = -0.295% CSAT**          |
-| Bed Occupancy → Readmissions | -0.0026 | **+1% occupancy = +0.26% readmission risk** |
+#### **D. Patient Satisfaction (CSAT)**  
+| Hospital          | CSAT Range | Key Trends |  
+|-------------------|------------|------------|  
+| Specialty Jeddah  | **4.44–4.59** | Highest: **4.59** (ICU, Feb 2025; wait: **2.8hr**). Lowest: **4.44** (ICU, May 2025) |  
+| Al Madina         | **4.45–4.56** | Lowest: **4.45** (Oncology, Oct 2024; wait: **2.82hr**). ICU consistency: **4.54** (Jul 2024) |  
+| Specialty Abha    | **4.43–4.57** | Highest: **4.57** (Oncology, Nov 2023; wait: **2.99hr**). ICU volatility: **4.43–4.54** |  
 
-#### 📈 Predictive Readmission Forecast
-**Model Performance**:  
+#### **E. Correlation Analysis**  
+| Metric Pair               | Correlation | Interpretation |  
+|---------------------------|-------------|----------------|  
+| **ALOS ↔ Wait Time**      | -0.00016    | Negligible linear relationship |  
+| **ALOS ↔ BOR**            | -0.0018     | Minimal impact |  
+| **Wait Time ↔ CSAT**      | -0.0059     | Weak negative correlation |  
+| **Readmission ↔ CSAT**    | -0.00052    | No significant link |  
+> **Key Insight**: Weak correlations suggest ALOS drivers are **non-linear** (e.g., case complexity, care coordination).  
+
+#### **F. Predictive Readmission Analytics**  
+- **Model**: RandomForest (Accuracy: **93.94%**, ROC AUC: **0.9636**)  
+
 ```python
 Best params: {'max_depth': None, 'min_samples_split': 2, 'n_estimators': 300}
 Accuracy: 0.9394 • ROC AUC: 0.9636
@@ -283,57 +307,43 @@ Confusion Matrix:
 
 ### 13. Recommendations
 
-#### 🔄 Process Optimization
-1. **Reduce Length of Stay (ALOS)**  
-   - Conduct root-cause analysis for ICU/Oncology delays at Jeddah (ALOS 8.02-8.11d)  
-   - Implement case-mix adjusted discharge protocols  
-   - *Rationale: Weak correlations indicate complex non-linear drivers*
+1. **Reduce ALOS** (Priority: **ICU/Oncology**):  
+ - Launch **discharge readiness teams** for Jeddah Oncology (ALOS: 8.11 days) and Al Madina ICU (ALOS: 8.02 days)  
+ - Address **non-linear drivers** (weekend staffing, care coordination) using Random Forest analysis  
 
-2. **Optimize Wait Times**  
-   - Deploy fast-track triage when waits exceed 3.0hrs  
-   - **Quantifiable Target**: Reduce waits by 30min → +0.295% CSAT  
-   - *Correlation: Wait Time → CSAT (r = -0.0059)*
+2. **Optimize Wait Times**:  
+ - Deploy **predictive queue management** during peak hours (e.g., Abha Oncology Feb: 3.21hr wait)  
+ - Scale Al Madina’s **2.68hr wait model** (July 2024 Oncology) hospital-wide  
 
-3. **Bed Occupancy Management**  
-   - Activate dynamic bed coordination when occupancy >75%  
-   - Prioritize January-March (peak readmission risk periods)  
-   - *Correlation: Occupancy → Readmissions (r = -0.0026)*
+3. **Chronic Disease Management**:  
+ - Establish clinics for **heart disease** (Jeddah: 958 cases) and **hyperlipidemia** (Abha: 337 cases)  
 
-#### 🧠 Predictive Analytics Implementation
-```mermaid
-graph TD
-A[Patient Admission] --> B{{Readmission Risk Model}}
-B -->|Risk Score >0.85| C[Early Intervention Clinic]
-B -->|Risk Score 0.7-0.85| D[Telehealth Follow-up]
-B -->|Risk Score <0.7| E[Standard Discharge]
-```
-### 🎯 Predictive Model Focus & Targets
-- **Target Patients**: Chronic conditions (hyperlipidemia/UTI) during high-occupancy months  
-- **Prevention Goal**: 8,029 avoidable readmissions (model true positives)  
-- **Model Performance**: 93.94% accuracy • ROC AUC: 0.9636
+4. **Elevate CSAT**:  
+ - **Real-time feedback kiosks** in volatile departments (e.g., Abha ICU: CSAT **4.43–4.54**)  
+ - **Empathy training** during low-CSAT periods (e.g., Al Madina Oncology: **4.45** in Oct 2024)  
 
-### 🌟 Patient Experience Enhancement Strategy
-| Hospital          | Priority Action                          | Target Impact            | Timeline   |
-|-------------------|------------------------------------------|--------------------------|------------|
-| **Al Madina**     | • Empathy training<br>• Oncology fast-track lanes | Increase CSAT from 4.49 → 4.53+ | Q3 2025    |
-| **Specialty Abha**| • ICU wait time reduction<br>• Discharge efficiency | Achieve peak CSAT 4.57   | Q4 2025    |
-| **All Sites**     | • Real-time feedback kiosks<br>• Service recovery protocols | Resolve CSAT dips ≤24hrs | Immediate  |
+5. **Leverage Predictive Analytics**:  
+ - Integrate **readmission model** to reduce **950 false negatives**  
+ - Conduct **non-linear analysis** to identify hidden ALOS drivers  
 
-> **📉 Correlation Insight**:  
-> CSAT improvements show negligible impact on readmissions (r = -0.00052) - **clinical interventions should be prioritized** for readmission reduction
+6. **Dynamic Bed Management**:  
+ - **Cross-departmental dashboards** to stabilize BOR (e.g., prevent Abha’s **72.9%** Jul 2025 dip)  
+ - **Discharge algorithms** to maintain BOR within **75–85%**  
 
+> **Success Metrics**: ALOS ≤7 days, wait times ≤2.5hr, CSAT ≥4.55, 30-day readmissions ↓10%.  
 
 ---
 
 ## 14. Future Work
-- Develop real-time dashboard with predictive occupancy alerts
-- Integrate outpatient clinic data for comprehensive flow analysis
-- Expand ML model to forecast CSAT from operational metrics
-- Implement ML-based readmission prediction system
+
+- Real-time dashboard with predictive alerts
+- Integrate outpatient clinic data
+- Expand ML model to forecast CSAT
+- ML-based readmission prediction system
 
 ---
 
 ## 15. Technical Details
 **Tools Used**: 
-- Power BI 
-- Power Query
+Power BI • Power Query
+Methods: Time-series analysis • Random Forest modeling
