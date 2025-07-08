@@ -26,7 +26,7 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 ---
 
 ### 2. Project Goals <a name="project-goals"></a>
-- **Detect Underperformance**: Identify real-time trends breaching ADAA thresholds for metrics like ALOS, BOR%, ICD10 descriptions, CPT descriptions, and ER wait time.  
+- **Detect Underperformance**: Identify real-time trends breaching ADAA thresholds for metrics like ALOS, BOR%, ICD10 descriptions, CPT descriptions, and  wait time.  
 - **Enable Data-Driven Decisions**: Provide department heads with visual insights to understand performance drivers.  
 - **Ensure Regulatory Compliance**: Generate auditable documentation demonstrating adherence to MOH and ADAA requirements.  
 
@@ -156,12 +156,12 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 | **AdmissionDateKey**     | Admission date surrogate key      | YYYYMMDD integer format        | Date dimension join for admission timing |
 | **DischargeDateKey**     | Discharge date surrogate key      | YYYYMMDD integer format        | Date dimension join; validate ≥ AdmissionDateKey |
 | **LengthOfStay**         | Duration in days                  | Integer (e.g., 1)              | Calculate from date keys; watch same-day discharges |
-| **WaitTimeHours**        | ER wait time pre-admission        | Decimal (e.g., 4.8)            | Track efficiency; may have outliers |
+| **WaitTimeHours**        |  wait time pre-admission        | Decimal (e.g., 4.8)            | Track efficiency; may have outliers |
 | **BedOccupancyRate**     | Utilization percentage            | Decimal 0.00-1.00 (e.g., 0.83)| Snapshotted at admission; impacts resource analysis |
 | **PrimaryDiagnosisCode** | Primary ICD-10 code               | Standardized (e.g., E78.5)     | Join to diagnosis dimension; clinical grouping |
 | **PrimaryDiagnosisDesc** | Diagnosis description             | Human-readable (e.g., Hyperlipidemia) | Reporting use; denormalized from code |
 | **ProcedureCodes**       | Performed procedure codes         | CPT/HCPCS (e.g., 99232)        | Consider array storage; impacts billing analytics |
-| **AdmissionSource**      | Point of origin                   | Categorical (e.g., ER)         | Flow analysis; ER vs. referral differences |
+| **AdmissionSource**      | Point of origin                   | Categorical (e.g., )         | Flow analysis;  vs. referral differences |
 | **InsuranceType**        | Payer category                    | Categorical (e.g., Private)    | Reimbursement analysis; impacts financial facts |
 | **DischargeDisposition** | Post-care destination             | Categorical (e.g., Hospice)    | Readmission risk indicator; care continuity |
 | **CSAT_Score**           | Satisfaction score (1-5 scale)    | Decimal (e.g., 4.6)            | Collected 1-14d post-discharge; voluntary bias |
