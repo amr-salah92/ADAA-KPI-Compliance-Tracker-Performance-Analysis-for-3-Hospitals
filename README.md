@@ -25,6 +25,7 @@ Within healthcare, the **Ada’a Health Program** (launched 2017) evaluates hosp
 
 ---
 
+
 ### 2. Project Goals <a name="project-goals"></a>
 - **Detect Underperformance**: Identify real-time trends breaching ADAA thresholds for metrics like ALOS, BOR%, ICD10 descriptions, CPT descriptions, and  wait time.  
 - **Enable Data-Driven Decisions**: Provide department heads with visual insights to understand performance drivers.  
@@ -237,6 +238,8 @@ Here are the tables rewritten in the requested Markdown format:
   - Al Madina: 4.49 
   - Specialty Abha: 4.51
 - 🔥 **Clinical Hotspots**: Neurology/Oncology show highest chronic condition loads
+
+![Screenshot_13-7-2025_22342_chat deepseek com](https://github.com/user-attachments/assets/b07f3644-e9d7-4782-97f4-08c2d3d2654c)
 
 ---
 
