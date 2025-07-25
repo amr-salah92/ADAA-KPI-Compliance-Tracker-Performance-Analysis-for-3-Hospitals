@@ -239,7 +239,8 @@ Here are the tables rewritten in the requested Markdown format:
   - Specialty Abha: 4.51
 - 🔥 **Clinical Hotspots**: Neurology/Oncology show highest chronic condition loads
 
-![Screenshot_13-7-2025_22342_chat deepseek com](https://github.com/user-attachments/assets/b07f3644-e9d7-4782-97f4-08c2d3d2654c)
+![c4519b52-8419-4a8c-a198-170f67051287](https://github.com/user-attachments/assets/d1ced714-e776-4a65-95ce-4c526ea30935)
+
 
 ---
 
