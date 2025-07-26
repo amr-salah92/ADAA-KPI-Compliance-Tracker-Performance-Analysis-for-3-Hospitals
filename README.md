@@ -201,7 +201,8 @@ Here are the tables rewritten in the requested Markdown format:
 | FeedbackCategory (PK)| Category of CSAT feedback                   | Lookup table for CSAT feedback categories                           | Decodes CSAT_FeedbackCategory in fact_admissions |
 |                    |                                               | 6 distinct categories (e.g., Timeliness, Communication)             |                                               |
 
-![image (8)](https://github.com/user-attachments/assets/e55f56ac-8a0d-42ea-93ea-210c8ec7276d)
+
+![Screenshot_26-7-2025_133515_chat deepseek com](https://github.com/user-attachments/assets/78e02201-0264-4280-90d5-ae1fcffc8de9)
 
 ---
 
