@@ -202,7 +202,6 @@ Here are the tables rewritten in the requested Markdown format:
 |                    |                                               | 6 distinct categories (e.g., Timeliness, Communication)             |                                               |
 
 
-![Screenshot_26-7-2025_133515_chat deepseek com](https://github.com/user-attachments/assets/78e02201-0264-4280-90d5-ae1fcffc8de9)
 
 ---
 
@@ -240,8 +239,8 @@ Here are the tables rewritten in the requested Markdown format:
   - Specialty Abha: 4.51
 - 🔥 **Clinical Hotspots**: Neurology/Oncology show highest chronic condition loads
 
-![c4519b52-8419-4a8c-a198-170f67051287](https://github.com/user-attachments/assets/d1ced714-e776-4a65-95ce-4c526ea30935)
 
+![Screenshot_26-7-2025_133515_chat deepseek com](https://github.com/user-attachments/assets/78e02201-0264-4280-90d5-ae1fcffc8de9)
 
 ---
 
