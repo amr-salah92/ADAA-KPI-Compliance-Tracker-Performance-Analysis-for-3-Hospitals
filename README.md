@@ -11,10 +11,11 @@
 8. [Data Structure & Initial Checks](#data-structure--initial-checks)  
 9. [Documenting Issues](#documenting-issues)  
 10. [Executive Summary](#executive-summary)  
-11. [Insights Deep Dive](#insights-deep-dive)  
-12. [Recommendations](#recommendations)  
-13. [Future Work](#future-work)  
-14. [Technical Details](#technical-details)  
+11. [Insights Deep Dive](#insights-deep-dive)
+12. [Business Questions & Answers](#Business-Questions-&-Answers)
+13. [Recommendations](#recommendations)  
+14. [Future Work](#future-work)  
+15. [Technical Details](#technical-details)  
 
 ---
 
@@ -242,9 +243,117 @@ Here are the tables rewritten in the requested Markdown format:
 
 ![Screenshot_26-7-2025_133515_chat deepseek com](https://github.com/user-attachments/assets/78e02201-0264-4280-90d5-ae1fcffc8de9)
 
+
+## 12. Business Questions & Answers: 
+
 ---
 
-## 12. ### 12. Insights Deep Dive  
+#### **1. Performance & Compliance**  
+**Q1: Are all hospitals meeting ADAA’s bed occupancy rate (BOR%) target?**  
+✅ **A:** Yes. All three hospitals (Specialty Jeddah, Al Madina, Specialty Abha) maintained BOR% within 73.8–75.9% in FY2023–2025, compliant with ADAA’s 75–85% target.  
+
+**Q2: Which operational metric shows significant non-compliance?**  
+⚠️ **A:** **Wait times** exceeded ADAA’s 2-hour target across all hospitals:  
+- Specialty Jeddah: 3.07 hrs  
+- Al Madina: 3.15 hrs  
+- Specialty Abha: 3.05 hrs  
+
+**Q3: How does patient satisfaction (CSAT) compare to targets?**  
+📊 **A:**  
+- Specialty Jeddah & Abha: **Exceeded** target (4.51 vs. ≥4.5).  
+- Al Madina: **Slightly below** target (4.49 vs. ≥4.5).  
+
+---
+
+#### **2. Clinical & Operational Insights**  
+**Q4: Which departments have the longest patient stays?**  
+🏥 **A:** ICU/Oncology units exceeded the 7-day ALOS target:  
+- Specialty Jeddah Oncology: 8.11 days  
+- Al Madina ICU: 8.02 days  
+- Specialty Abha ICU: 8.04 days  
+
+**Q5: What are the most common diagnoses/procedures?**  
+🩺 **A:** Top clinical priorities per hospital:  
+- **Specialty Jeddah:** Heart disease (958 cases), Chest X-rays (525).  
+- **Al Madina:** Anxiety (317 cases), MRI lumbar spine (185).  
+- **Specialty Abha:** Hyperlipidemia (337 cases), X-rays (192).  
+
+**Q6: Does longer wait time reduce patient satisfaction?**  
+📉 **A:** Weak negative correlation (r = -0.0059). Examples:  
+- Abha’s 3.25hr wait (May/Jun 2025) → CSAT 4.53.  
+- Jeddah’s 2.64hr wait (Mar 2025) → CSAT 4.59.  
+
+---
+
+#### **3. Data Quality & Governance**  
+**Q7: What were critical data issues, and how were they resolved?**  
+🔧 **A:**  
+- **3% NULLs** in `WaitTimeHours`/`CSAT_Score`: Fixed via department-month median imputation.  
+- **Inconsistent date formats**: Standardized to ISO 8601 (YYYY-MM-DD).  
+- **Incorrect ALOS calculation**: Recalculated as `DischargeDate - AdmissionDate`.  
+
+**Q8: How is regulatory compliance ensured?**  
+🛡️ **A:**  
+- **Standards:** GDPR (EU expatriates), HIPAA (domestic PHI).  
+- **Security:** Encryption (at rest/in transit), role-based access.  
+- **Audits:** Monthly log reviews + Privacy Impact Assessments.  
+
+---
+
+#### **4. Strategic Recommendations**  
+**Q9: How can hospitals reduce wait times?**  
+⏱️ **A:**  
+- Deploy **predictive queue management** during peaks (e.g., Abha’s 3.21hr wait in Feb).  
+- Scale Al Madina’s successful Oncology model (2.68hr wait in Jul 2024) hospital-wide.  
+
+**Q10: What actions improve patient satisfaction?**  
+💬 **A:**  
+- **Real-time feedback kiosks** in volatile departments (e.g., Abha ICU).  
+- **Empathy training** during low-CSAT periods (e.g., Al Madina Oncology’s 4.45 in Oct 2024).  
+
+**Q11: How can ALOS be reduced in ICU/Oncology?**  
+🔄 **A:** Launch **discharge readiness teams** for:  
+- Jeddah Oncology (ALOS: 8.11 days).  
+- Al Madina ICU (ALOS: 8.02 days).  
+
+---
+
+#### **5. Advanced Analytics & Future Work**  
+**Q12: How accurate is the readmission prediction model?**  
+🤖 **A:** **93.94% accuracy** (ROC AUC: 0.9636) using RandomForest. Key metrics:  
+- Precision: 0.94  
+- Recall: 0.94  
+- F1-Score: 0.94  
+
+**Q13: What future initiatives are planned?**  
+🚀 **A:**  
+- **Real-time dashboard** with predictive alerts.  
+- **ML-based CSAT forecasting**.  
+- **Integration of outpatient clinic data**.  
+
+---
+
+#### **6. Technical & Resource Allocation**  
+**Q14: What tools were used for analysis?**  
+🛠️ **A:** Power BI (descriptive analytics), Power Query (data transformation), and Random Forest modeling (predictive analytics).  
+
+**Q15: How should staffing be optimized?**  
+👥 **A:**  
+- **Proactive bed management** to sustain occupancy.  
+- **Increase staffing during peak hours** (e.g., ICU wait time peaks in Oct 2023/Jul 2024).  
+
+--- 
+
+**Key Success Metrics for Recommendations**:  
+- ALOS ≤7 days  
+- Wait times ≤2.5 hrs  
+- CSAT ≥4.55  
+- 30-day readmissions ↓10%
+
+
+---
+
+## 13. Insights Deep Dive  
 
 #### **A. Capacity & Occupancy**  
 | Hospital          | ALOS (Days) | Target | BOR Range       | Key Findings |  
@@ -311,7 +420,7 @@ Confusion Matrix:
 
 ---
 
-### 13. Recommendations
+### 14. Recommendations
 
 1. **Reduce ALOS** (Priority: **ICU/Oncology**):  
  - Launch **discharge readiness teams** for Jeddah Oncology (ALOS: 8.11 days) and Al Madina ICU (ALOS: 8.02 days)  
@@ -340,7 +449,7 @@ Confusion Matrix:
 
 ---
 
-## 14. Future Work
+## 15. Future Work
 
 - Real-time dashboard with predictive alerts
 - Integrate outpatient clinic data
@@ -349,7 +458,7 @@ Confusion Matrix:
 
 ---
 
-## 15. Technical Details
+## 16. Technical Details
 **Tools Used**: 
 Power BI • Power Query
 Methods: Time-series analysis • Random Forest modeling
